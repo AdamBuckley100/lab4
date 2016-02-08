@@ -57,23 +57,33 @@ public class UserInterface
 		display = new JTextField();
 		contentPane.add(display, BorderLayout.NORTH);
 
-		JPanel buttonPanel = new JPanel(new GridLayout(4, 4));
+		JPanel buttonPanel = new JPanel(new GridLayout(5, 4));
+		
+			addButton(buttonPanel, "C");
+			addButton(buttonPanel, "(");
+			addButton(buttonPanel, ")");
+			addButton(buttonPanel, "/");
+			
 			addButton(buttonPanel, "7");
 			addButton(buttonPanel, "8");
 			addButton(buttonPanel, "9");
-			addButton(buttonPanel, "C");
+			addButton(buttonPanel, "*");
+			
 			addButton(buttonPanel, "4");
 			addButton(buttonPanel, "5");
 			addButton(buttonPanel, "6");
-			addButton(buttonPanel, "*");
+			addButton(buttonPanel, "+");
+			
 			addButton(buttonPanel, "1");
 			addButton(buttonPanel, "2");
 			addButton(buttonPanel, "3");
-			addButton(buttonPanel, "/");
-			addButton(buttonPanel, "0");
-			addButton(buttonPanel, "+");
 			addButton(buttonPanel, "-");
+			
+			addButton(buttonPanel, "0");
+			addButton(buttonPanel, ".");
+			addButton(buttonPanel, "^");
 			addButton(buttonPanel, "=");
+			
 		contentPane.add(buttonPanel, BorderLayout.CENTER);
 
 		status = new JLabel(calc.getAuthor());
@@ -115,6 +125,8 @@ public class UserInterface
 			int number = Integer.parseInt(command);
 			calc.numberPressed(number);
 		}
+		else if(command.equals("."))
+			calc.dotPressed();
 		else if(command.equals("+"))
 			calc.plus();
 		else if(command.equals("-"))
@@ -127,7 +139,12 @@ public class UserInterface
 			calc.multiply();
 		else if(command.equals("/"))
 			calc.divide();
-
+		else if(command.equals("("))
+			calc.openBracket();
+		else if(command.equals("("))
+			calc.closeBracket();
+		else if(command.equals("^"))
+			calc.caret();
 		redisplay();
 	}
 
@@ -137,7 +154,23 @@ public class UserInterface
 	 */
 	private void redisplay()
 	{
-		display.setText("" + calc.getDisplayValue());
+		//display.setText("" + calc.getDisplayValue());
+		
+		if (calc.getDotPressed() == true)
+		{
+			if (calc.getHasANumAfterDot() == false)
+			{
+			display.setText("" + calc.getWholeDisplayValue() + ".");
+			}
+			else
+			{
+			display.setText("" + calc.getWholeDisplayValue() + "." + calc.getFractionDisplayValue());
+			}
+		}
+		else
+		{
+			display.setText("" + calc.getWholeDisplayValue());
+		}
 	}
 
 	/**
