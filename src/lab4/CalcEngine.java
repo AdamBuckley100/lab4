@@ -9,7 +9,9 @@ package lab4;
 public class CalcEngine
 {
 	char operator;
+	
 	int displayValueWhole, displayValueFraction;
+	
 	boolean hasTheDecimalBeenPressed;
 	boolean hasANumPressedAfterDot;
 	double operand1;
@@ -35,7 +37,7 @@ public class CalcEngine
 	{
 		return(displayValueWhole);
 	}
-	
+
 	/**
 	 * Return the value that should currently be displayed on the calculator
 	 * display.
@@ -44,7 +46,7 @@ public class CalcEngine
 	{
 		return(displayValueFraction);
 	}
-	
+
 	/**
 	 * Return the value that should currently be displayed on the calculator
 	 * display.
@@ -62,7 +64,7 @@ public class CalcEngine
 	{
 		if (hasTheDecimalBeenPressed == false)
 		{
-		displayValueWhole = displayValueWhole *10 + number;
+			displayValueWhole = displayValueWhole *10 + number;
 		}
 		else
 		{
@@ -71,12 +73,12 @@ public class CalcEngine
 			hasANumPressedAfterDot = true;
 		}
 	}
-	
+
 	public void dotPressed()
 	{
 		hasTheDecimalBeenPressed = true;
 	}
-	
+
 	public boolean getDotPressed()
 	{
 		return hasTheDecimalBeenPressed;
@@ -171,23 +173,23 @@ public class CalcEngine
 			operand1 = 0;
 		}
 	}
-	
+
 	public double convertNumToDouble()
 	{
 		String num = displayValueWhole + "." + displayValueFraction;
-		
+
 		double number = Double.parseDouble(num);
-		
+
 		return number;
 	}
-	
+
 	public void convertFromDouble(double num)
 	{
 		int wholePart = (int) num;
 		double fractionPart = num-wholePart;
-		
+
 		displayValueWhole = wholePart;
-		
+
 		if (fractionPart > 0)
 		{
 			String s = String.valueOf(fractionPart);
@@ -195,8 +197,8 @@ public class CalcEngine
 			String t = s.substring(2,2+9);
 			displayValueFraction = Integer.parseInt(t);
 			// t needs trailing zeros removed.
-			
-			
+
+
 			hasTheDecimalBeenPressed = true;
 			hasANumPressedAfterDot = true;
 		}

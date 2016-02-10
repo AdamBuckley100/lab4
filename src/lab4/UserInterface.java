@@ -14,12 +14,12 @@ import javax.swing.border.*;
  * @version 31 July 2000
  */
 public class UserInterface
-	implements ActionListener
+implements ActionListener
 {
 	private CalcEngine calc;
 	private boolean showingAuthor;
 
-    private JFrame frame;
+	private JFrame frame;
 	private JTextField display;
 	private JLabel status;
 
@@ -38,7 +38,7 @@ public class UserInterface
 	 * Make this interface visible again. (Has no effect if it is already
 	 * visible.)
 	 */
-    public void setVisible(boolean visible)
+	public void setVisible(boolean visible)
 	{
 		frame.setVisible(visible);
 	}
@@ -49,7 +49,7 @@ public class UserInterface
 	private void makeFrame()
 	{
 		frame = new JFrame(calc.getTitle());
-		
+
 		JPanel contentPane = (JPanel)frame.getContentPane();
 		contentPane.setLayout(new BorderLayout(8, 8));
 		contentPane.setBorder(new EmptyBorder( 10, 10, 10, 10));
@@ -58,32 +58,32 @@ public class UserInterface
 		contentPane.add(display, BorderLayout.NORTH);
 
 		JPanel buttonPanel = new JPanel(new GridLayout(5, 4));
-		
-			addButton(buttonPanel, "C");
-			addButton(buttonPanel, "(");
-			addButton(buttonPanel, ")");
-			addButton(buttonPanel, "/");
-			
-			addButton(buttonPanel, "7");
-			addButton(buttonPanel, "8");
-			addButton(buttonPanel, "9");
-			addButton(buttonPanel, "*");
-			
-			addButton(buttonPanel, "4");
-			addButton(buttonPanel, "5");
-			addButton(buttonPanel, "6");
-			addButton(buttonPanel, "+");
-			
-			addButton(buttonPanel, "1");
-			addButton(buttonPanel, "2");
-			addButton(buttonPanel, "3");
-			addButton(buttonPanel, "-");
-			
-			addButton(buttonPanel, "0");
-			addButton(buttonPanel, ".");
-			addButton(buttonPanel, "^");
-			addButton(buttonPanel, "=");
-			
+
+		addButton(buttonPanel, "C");
+		addButton(buttonPanel, "(");
+		addButton(buttonPanel, ")");
+		addButton(buttonPanel, "/");
+
+		addButton(buttonPanel, "7");
+		addButton(buttonPanel, "8");
+		addButton(buttonPanel, "9");
+		addButton(buttonPanel, "*");
+
+		addButton(buttonPanel, "4");
+		addButton(buttonPanel, "5");
+		addButton(buttonPanel, "6");
+		addButton(buttonPanel, "+");
+
+		addButton(buttonPanel, "1");
+		addButton(buttonPanel, "2");
+		addButton(buttonPanel, "3");
+		addButton(buttonPanel, "-");
+
+		addButton(buttonPanel, "0");
+		addButton(buttonPanel, ".");
+		addButton(buttonPanel, "^");
+		addButton(buttonPanel, "=");
+
 		contentPane.add(buttonPanel, BorderLayout.CENTER);
 
 		status = new JLabel(calc.getAuthor());
@@ -111,15 +111,15 @@ public class UserInterface
 		String command = event.getActionCommand();
 
 		if(command.equals("0") ||
-		   command.equals("1") ||
-		   command.equals("2") ||
-		   command.equals("3") ||
-		   command.equals("4") ||
-		   command.equals("5") ||
-		   command.equals("6") ||
-		   command.equals("7") ||
-		   command.equals("8") ||
-		   command.equals("9"))
+				command.equals("1") ||
+				command.equals("2") ||
+				command.equals("3") ||
+				command.equals("4") ||
+				command.equals("5") ||
+				command.equals("6") ||
+				command.equals("7") ||
+				command.equals("8") ||
+				command.equals("9"))
 		{
 			// for the wrapper class integer, a string between 1 and 9 is input...
 			int number = Integer.parseInt(command);
@@ -155,16 +155,16 @@ public class UserInterface
 	private void redisplay()
 	{
 		//display.setText("" + calc.getDisplayValue());
-		
+
 		if (calc.getDotPressed() == true)
 		{
 			if (calc.getHasANumAfterDot() == false)
 			{
-			display.setText("" + calc.getWholeDisplayValue() + ".");
+				display.setText("" + calc.getWholeDisplayValue() + ".");
 			}
 			else
 			{
-			display.setText("" + calc.getWholeDisplayValue() + "." + calc.getFractionDisplayValue());
+				display.setText("" + calc.getWholeDisplayValue() + "." + calc.getFractionDisplayValue());
 			}
 		}
 		else
