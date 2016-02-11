@@ -173,6 +173,10 @@ public class CalcEngine
 		}
 		else if (operator == '-') {
 			//displayValueWhole = operand1-displayValueWhole;
+			//operand1 = 0;
+			double fullNumber = convertNumToDouble();
+			double fullNumSubtracted = operand1 - fullNumber;
+			convertFromDouble(fullNumSubtracted);
 			operand1 = 0;
 		}
 		else if (operator == '*') {
@@ -205,8 +209,17 @@ public class CalcEngine
 		{
 			String s = String.valueOf(fractionPart);
 			//limit included (2+9)
+			if (s.length() >= 11)
+			{
 			String t = s.substring(2,2+9);
 			displayValueFraction = Integer.parseInt(t);
+			}
+			else
+			{
+		    // I DUNNO WHAT I DID HERE BUT IT SEEMS TO WORK????? ***********************************************
+			String t = s.substring(2);
+			displayValueFraction = Integer.parseInt(t);
+			}
 			// t needs trailing zeros removed.
 
 
