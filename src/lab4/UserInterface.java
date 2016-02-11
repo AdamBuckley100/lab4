@@ -28,6 +28,8 @@ implements ActionListener
 	 */
 	public UserInterface(CalcEngine engine)
 	{
+		// I THINK THIS IS WHERE EVERYTHING BEGINS
+		System.out.println("setup");
 		calc = engine;
 		showingAuthor = true;
 		makeFrame();

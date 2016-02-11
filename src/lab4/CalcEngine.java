@@ -10,9 +10,9 @@ import java.util.*;
 public class CalcEngine
 {
 	char operator;
-	
+
 	int displayValueWhole, displayValueFraction;
-	
+
 	boolean hasTheDecimalBeenPressed;
 	boolean hasANumPressedAfterDot;
 	double operand1;
@@ -23,6 +23,7 @@ public class CalcEngine
 	 */
 	public CalcEngine()
 	{
+		Stack st = new Stack();
 		hasTheDecimalBeenPressed = false;
 		hasANumPressedAfterDot = false;
 		operator =' ';
@@ -257,5 +258,18 @@ public class CalcEngine
 	public String getVersion()
 	{
 		return("Ver. 1.0");
+	}
+
+	static void pushWithShow(Stack st, int a) {
+		st.push(new Integer(a));
+		System.out.println("push(" + a + ")");
+		System.out.println("stack: " + st);
+	}
+
+	static void PopWithSHow(Stack st) {
+		System.out.print("pop -> ");
+		Integer a = (Integer) st.pop();
+		System.out.println(a);
+		System.out.println("stack: " + st);
 	}
 }
