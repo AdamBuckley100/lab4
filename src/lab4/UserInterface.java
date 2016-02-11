@@ -32,6 +32,8 @@ implements ActionListener
 		showingAuthor = true;
 		makeFrame();
 		frame.setVisible(true);
+		// Below: Close the application when X is hit in the top right corner.
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	}
 
 	/**

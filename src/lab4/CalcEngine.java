@@ -1,4 +1,5 @@
 package lab4;
+import java.util.*;
 
 /**
  * The main part of the calculator doing the calculations.
@@ -102,23 +103,32 @@ public class CalcEngine
 	 */
 	public void minus()
 	{
-		operand1 = displayValueWhole;
+		operand1 = convertNumToDouble();
 		displayValueWhole = 0;
-		operator = '-'; 
+		displayValueFraction = 0;
+		hasTheDecimalBeenPressed = false;
+		hasANumPressedAfterDot = false;
+		operator = '-';
 	}
 
 	public void multiply()
 	{
-		operand1 = displayValueWhole;
+		operand1 = convertNumToDouble();
 		displayValueWhole = 0;
-		operator = '*'; 
+		displayValueFraction = 0;
+		hasTheDecimalBeenPressed = false;
+		hasANumPressedAfterDot = false;
+		operator = '*';
 	}
 
 	public void divide()
 	{
-		operand1 = displayValueWhole;
+		operand1 = convertNumToDouble();
 		displayValueWhole = 0;
-		operator = '/'; 
+		displayValueFraction = 0;
+		hasTheDecimalBeenPressed = false;
+		hasANumPressedAfterDot = false;
+		operator = '/';
 	}
 
 	public void openBracket()
@@ -237,7 +247,7 @@ public class CalcEngine
 	 */
 	public String getAuthor()
 	{
-		return("Joe Daly");
+		return(" ");
 	}
 
 	/**
