@@ -158,23 +158,6 @@ implements ActionListener
 	 */
 	private void redisplay()
 	{
-		//display.setText("" + calc.getDisplayValue());
-
-		if (calc.getDotPressed() == true)
-		{
-			if (calc.getHasANumAfterDot() == false)
-			{
-				display.setText("" + calc.getWholeDisplayValue() + ".");
-			}
-			else
-			{
-				display.setText("" + calc.getWholeDisplayValue() + "." + calc.getFractionDisplayValue());
-			}
-		}
-		else
-		{
-			display.setText("" + calc.getWholeDisplayValue());
-		}
 	}
 
 	/**
