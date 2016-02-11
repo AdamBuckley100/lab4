@@ -91,7 +91,7 @@ public class CalcEngine
 	public void openBracket()
 	{
 		operator = '(';
-		
+
 	}
 
 	public void closeBracket()
