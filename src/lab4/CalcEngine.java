@@ -12,7 +12,6 @@ public class CalcEngine
 	char operator;
 
 	String displayValue = "";
-	Stack st;
 
 	static HashMap<Character,Integer> priority = setPriorityOfOperands();
 
@@ -64,6 +63,41 @@ public class CalcEngine
 		}
 		return result;
 	}
+	
+	public void evaluatingAPostfixExpression()
+	{
+		String thePostfixExpression = convertingInfixToPostfix();
+		Stack<Character> st = new Stack<Character>();
+
+		// this stack (which is the same stack) should be empty as the 
+		// stack is empty at the end of the convertingInfixToPostfix method.
+		
+		// scan the infix for left to right
+		for(int i = 0 ; i < thePostfixExpression.length() ; i++)
+		{
+			char c = displayValue.charAt(i);
+			if (Character.isDigit(c))
+			{
+				pushWithShow(st,c);
+			}
+			else
+			{
+				// c right now is an operator represente as a char
+				int tempOne = Character.getNumericValue(popWithShow(st));
+				int tempTwo = Character.getNumericValue(popWithShow(st));
+				
+				int result = 0;
+				
+				//good place for a switch
+				
+				switch (c)
+				{
+				case '+': result = tempOne + tempOne;
+				}
+				}
+			}
+		}
+	//}
 
 	public boolean comparePriorityOfOperands(char a, char b)
 	{
@@ -97,7 +131,6 @@ public class CalcEngine
 
 		return priority;
 	}
-
 
 	/**
 	 * A number button was pressed. Do whatever you have to do to handle it.
@@ -165,10 +198,10 @@ public class CalcEngine
 	 */
 	public void equals()
 	{
-		for(int i = 0, n = displayValue.length() ; i < n ; i++) { 
-			char c = displayValue.charAt(i); 
+	//	for(int i = 0, n = displayValue.length() ; i < n ; i++) { 
+		//	char c = displayValue.charAt(i); 
 			//pushWithShow(st, String.valueOf(c));
-		}
+		System.out.println(convertingInfixToPostfix());
 	}
 
 	/**
@@ -198,16 +231,6 @@ public class CalcEngine
 	public String getDisplayValue()
 	{
 		return displayValue;
-	}
-
-	/**
-	 * This method simply reads the contents of the stack.
-	 */
-	public void readTheStacksContents()
-	{
-		for(int i = 0, n = displayValue.length() ; i < n ; i++) { 
-			popWithShow(st);
-		}
 	}
 
 	/**
