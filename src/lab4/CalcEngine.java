@@ -14,15 +14,90 @@ public class CalcEngine
 	String displayValue = "";
 	Stack st;
 
+	static HashMap<Character,Integer> priority = setPriorityOfOperands();
+
 	/**
 	 * Create a CalcEngine instance. Initialise its state so that it is ready 
 	 * for use.
 	 */
 	public CalcEngine()
 	{
-		Stack st = new Stack();
-		operator =' ';
+		//Stack st = new Stack();
+		//operator =' ';
 	}
+
+	public String convertingInfixToPostfix()
+	{
+		String result = "";
+		Stack<Character> st = new Stack<Character>();
+		// scan the infix for left to right
+		for(int i = 0; i < displayValue.length() ; i++)
+		{
+			char c = displayValue.charAt(i);
+			// if the scanned character is an operand, add it to the postfix string called displayValue
+			if (Character.isDigit(c))
+			{
+				result += c;
+			}
+			else
+			{
+				if (st.isEmpty())
+				{
+					pushWithShow(st,c);
+				}
+				else
+				{
+					while (!st.isEmpty() && comparePriorityOfOperands(peekWithShow(st),c))
+					{
+						char popedChar = popWithShow(st);
+						result += popedChar;
+					}
+					// push to stack
+					pushWithShow(st, c);
+				}
+			}
+		}
+		while (!st.isEmpty())
+		{
+			char popedChar = popWithShow(st);
+			result += popedChar;
+		}
+		return result;
+	}
+
+	public boolean comparePriorityOfOperands(char a, char b)
+	{
+		if (priority.get(a) > priority.get(b))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}	
+	}
+
+	public static HashMap<Character,Integer> setPriorityOfOperands()
+	{
+		//BIMDAS - ORDER: 1) brackets 2) multiplication 3) division 4) addition (same as subtraction)
+		// 5) subtraction (same as addition).
+
+		HashMap<Character,Integer> priority = new HashMap<Character,Integer>();
+
+		priority.put('+',1);
+
+		priority.put('-',1);
+
+		priority.put('(',4);
+		priority.put(')',4);
+
+		priority.put('÷',2);
+
+		priority.put('×',2);
+
+		return priority;
+	}
+
 
 	/**
 	 * A number button was pressed. Do whatever you have to do to handle it.
@@ -144,17 +219,22 @@ public class CalcEngine
 		return("Ver. 1.0");
 	}
 
-	static void pushWithShow(Stack st, String a) {
-		st.push(new String(a));
+	static void pushWithShow(Stack<Character> st, char a) {
+		st.push(a);
 		System.out.println("push(" + a + ")");
 		System.out.println("stack: " + st);
 	}
 
-	static char popWithShow(Stack st) {
+	static char popWithShow(Stack<Character> st) {
 		System.out.print("pop -> ");
 		char a = (char) st.pop();
 		System.out.println(a);
 		System.out.println("stack: " + st);
 		return a;
+	}
+
+	static char peekWithShow(Stack<Character> st) {
+		char p = st.peek();
+		return p;
 	}
 }
