@@ -167,7 +167,7 @@ public class CalcEngine
 	{
 		for(int i = 0, n = displayValue.length() ; i < n ; i++) { 
 			char c = displayValue.charAt(i); 
-			pushWithShow(st, String.valueOf(c));
+			//pushWithShow(st, String.valueOf(c));
 		}
 	}
 
