@@ -12,10 +12,6 @@ public class CalcEngine
 	char operator;
 
 	String displayValue = "";
-
-	boolean hasTheDecimalBeenPressed;
-	boolean hasANumPressedAfterDot;
-	double operand1;
 	Stack st;
 
 	/**
@@ -25,19 +21,7 @@ public class CalcEngine
 	public CalcEngine()
 	{
 		Stack st = new Stack();
-		hasTheDecimalBeenPressed = false;
-		hasANumPressedAfterDot = false;
 		operator =' ';
-		operand1 = 0;
-	}
-
-	/**
-	 * Return the value that should currently be displayed on the calculator
-	 * display.
-	 */
-	public boolean getHasANumAfterDot()
-	{
-		return hasANumPressedAfterDot;
 	}
 
 	/**
@@ -46,17 +30,7 @@ public class CalcEngine
 	 */
 	public void numberPressed(int number)
 	{
-
-	}
-
-	public void dotPressed()
-	{
-		hasTheDecimalBeenPressed = true;
-	}
-
-	public boolean getDotPressed()
-	{
-		return hasTheDecimalBeenPressed;
+		displayValue = displayValue + number;
 	}
 
 	/**
@@ -77,7 +51,12 @@ public class CalcEngine
 
 	public void multiply()
 	{
-		displayValue += "X";
+		displayValue += "×";
+	}
+
+	public void dotPressed()
+	{
+		displayValue += ".";
 	}
 
 	public void divide()
@@ -87,12 +66,13 @@ public class CalcEngine
 
 	public void openBracket()
 	{
-		operator = '(';
+		displayValue += '(';
 	}
 
 	public void closeBracket()
 	{ 
-		displayValue += ")";
+		//for some reason it must be ' and never "
+		displayValue += ')';
 	}
 
 	public void dot()
@@ -111,7 +91,7 @@ public class CalcEngine
 	public void equals()
 	{
 		for(int i = 0, n = displayValue.length() ; i < n ; i++) { 
-		    char c = displayValue.charAt(i); 
+			char c = displayValue.charAt(i); 
 			pushWithShow(st, String.valueOf(c));
 		}
 	}
@@ -121,9 +101,6 @@ public class CalcEngine
 	 */
 	public void clear()
 	{
-		operand1 = 0;
-		hasTheDecimalBeenPressed = false;
-		hasANumPressedAfterDot = false;
 	}
 
 	/**
@@ -142,14 +119,19 @@ public class CalcEngine
 	{
 		return(" ");
 	}
-	
+
+	public String getDisplayValue()
+	{
+		return displayValue;
+	}
+
 	/**
 	 * This method simply reads the contents of the stack.
 	 */
 	public void readTheStacksContents()
 	{
 		for(int i = 0, n = displayValue.length() ; i < n ; i++) { 
-		    popWithShow(st);
+			popWithShow(st);
 		}
 	}
 

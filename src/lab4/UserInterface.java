@@ -13,8 +13,7 @@ import javax.swing.border.*;
  * @author Michael Kolling
  * @version 31 July 2000
  */
-public class UserInterface
-implements ActionListener
+public class UserInterface implements ActionListener
 {
 	private CalcEngine calc;
 	private boolean showingAuthor;
@@ -66,12 +65,13 @@ implements ActionListener
 		addButton(buttonPanel, "C");
 		addButton(buttonPanel, "(");
 		addButton(buttonPanel, ")");
+		// ÷ is exact same as /
 		addButton(buttonPanel, "/");
 
 		addButton(buttonPanel, "7");
 		addButton(buttonPanel, "8");
 		addButton(buttonPanel, "9");
-		addButton(buttonPanel, "*");
+		addButton(buttonPanel, "×");
 
 		addButton(buttonPanel, "4");
 		addButton(buttonPanel, "5");
@@ -112,6 +112,7 @@ implements ActionListener
 	 */
 	public void actionPerformed(ActionEvent event)
 	{
+		System.out.println("mm");
 		String command = event.getActionCommand();
 
 		if(command.equals("0") ||
@@ -139,13 +140,13 @@ implements ActionListener
 			calc.equals();
 		else if(command.equals("C"))
 			calc.clear();
-		else if(command.equals("*"))
+		else if(command.equals("×"))
 			calc.multiply();
 		else if(command.equals("/"))
 			calc.divide();
 		else if(command.equals("("))
 			calc.openBracket();
-		else if(command.equals("("))
+		else if(command.equals(")"))
 			calc.closeBracket();
 		else if(command.equals("^"))
 			calc.caret();
@@ -158,6 +159,7 @@ implements ActionListener
 	 */
 	private void redisplay()
 	{
+		display.setText("" + calc.getDisplayValue());
 	}
 
 	/**
