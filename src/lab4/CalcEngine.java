@@ -16,6 +16,7 @@ public class CalcEngine
 	boolean hasTheDecimalBeenPressed;
 	boolean hasANumPressedAfterDot;
 	double operand1;
+	Stack st;
 
 	/**
 	 * Create a CalcEngine instance. Initialise its state so that it is ready 
@@ -63,7 +64,6 @@ public class CalcEngine
 	 */
 	public void plus()
 	{
-		operator = '+';
 		displayValue += "+";
 	}
 
@@ -72,43 +72,36 @@ public class CalcEngine
 	 */
 	public void minus()
 	{
-		operator = '-';
 		displayValue += "-";
 	}
 
 	public void multiply()
 	{
-		operator = '*';
-		displayValue += "*";
+		displayValue += "X";
 	}
 
 	public void divide()
 	{
-		operator = '*';
 		displayValue += "÷";
 	}
 
 	public void openBracket()
 	{
 		operator = '(';
-
 	}
 
 	public void closeBracket()
-	{
-		operator = '/'; 
-		displayValue += "/";
+	{ 
+		displayValue += ")";
 	}
 
 	public void dot()
 	{
-		operator = '.'; 
 		displayValue += ".";
 	}
 
 	public void caret()
 	{
-		operator = '^';
 		displayValue += "^";
 	}
 
@@ -117,15 +110,9 @@ public class CalcEngine
 	 */
 	public void equals()
 	{
-		operand1 = 0;
-		if (operator == '-') {
-
-		}
-		else if (operator == '*') {
-
-		}
-		else if (operator == '/') {
-
+		for(int i = 0, n = displayValue.length() ; i < n ; i++) { 
+		    char c = displayValue.charAt(i); 
+			pushWithShow(st, String.valueOf(c));
 		}
 	}
 
@@ -155,6 +142,16 @@ public class CalcEngine
 	{
 		return(" ");
 	}
+	
+	/**
+	 * This method simply reads the contents of the stack.
+	 */
+	public void readTheStacksContents()
+	{
+		for(int i = 0, n = displayValue.length() ; i < n ; i++) { 
+		    popWithShow(st);
+		}
+	}
 
 	/**
 	 * Return the version number of this engine. This string is displayed as 
@@ -165,16 +162,17 @@ public class CalcEngine
 		return("Ver. 1.0");
 	}
 
-	static void pushWithShow(Stack st, int a) {
-		st.push(new Integer(a));
+	static void pushWithShow(Stack st, String a) {
+		st.push(new String(a));
 		System.out.println("push(" + a + ")");
 		System.out.println("stack: " + st);
 	}
 
-	static void PopWithSHow(Stack st) {
+	static char popWithShow(Stack st) {
 		System.out.print("pop -> ");
-		Integer a = (Integer) st.pop();
+		char a = (char) st.pop();
 		System.out.println(a);
 		System.out.println("stack: " + st);
+		return a;
 	}
 }

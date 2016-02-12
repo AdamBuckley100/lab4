@@ -1,5 +1,7 @@
 package lab4;
 
+import java.util.Stack;
+
 /**
  * The main class of a simple calculator. Create one of these and you'll
  * get the calculator on screen.
@@ -31,6 +33,7 @@ public class Calculator
 
 	public static void main(String[] args)
 	{
+	    Stack st = new Stack();
 		Calculator cTest;
 
 		cTest = new Calculator();
