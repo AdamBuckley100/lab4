@@ -44,6 +44,10 @@ public class CalcEngine
 				{
 					pushWithShow(st,c);
 				}
+				else if (!st.isEmpty() && displayValue.length() == i+1)
+				{
+					pushWithShow(st,c);
+				}
 				else
 				{
 					while (!st.isEmpty() && comparePriorityOfOperands(peekWithShow(st),c))
@@ -61,9 +65,10 @@ public class CalcEngine
 			char popedChar = popWithShow(st);
 			result += popedChar;
 		}
+		System.out.println(result + "jjj");
 		return result;
 	}
-	
+
 	public void evaluatingAPostfixExpression()
 	{
 		String thePostfixExpression = convertingInfixToPostfix();
@@ -71,33 +76,50 @@ public class CalcEngine
 
 		// this stack (which is the same stack) should be empty as the 
 		// stack is empty at the end of the convertingInfixToPostfix method.
-		
+
 		// scan the infix for left to right
+		System.out.println("hii" + thePostfixExpression);
 		for(int i = 0 ; i < thePostfixExpression.length() ; i++)
 		{
-			char c = displayValue.charAt(i);
+			char c = thePostfixExpression.charAt(i);
 			if (Character.isDigit(c))
 			{
 				pushWithShow(st,c);
 			}
 			else
 			{
-				// c right now is an operator represente as a char
+				// c right now is an operator represented as a char
 				int tempOne = Character.getNumericValue(popWithShow(st));
 				int tempTwo = Character.getNumericValue(popWithShow(st));
-				
+
 				int result = 0;
-				
+
 				//good place for a switch
-				
+
 				switch (c)
 				{
-				case '+': result = tempOne + tempOne;
+				case '+': result = tempOne + tempTwo;
+				break;
+				case '-': result = tempOne - tempTwo;
+				break;
+				case '×': result = tempOne * tempTwo;
+				break;
+				case '/': result = (tempOne/tempTwo);
+				break;
+				case '^': result = (int) Math.pow(tempOne, tempTwo);
 				}
-				}
+				
+				char resultInChar = Character.forDigit(result, 10);
+				pushWithShow(st,resultInChar);
 			}
 		}
-	//}
+		System.out.println("final result pop");
+		char finalResult = popWithShow(st);
+		//System.out.println("final result pop");
+		String finalResultInString = Character.toString(finalResult);
+		//int finalResultInInt = Integer.valueOf(finalResult);
+		displayValue = finalResultInString;
+	}
 
 	public boolean comparePriorityOfOperands(char a, char b)
 	{
@@ -198,10 +220,11 @@ public class CalcEngine
 	 */
 	public void equals()
 	{
-	//	for(int i = 0, n = displayValue.length() ; i < n ; i++) { 
+		//	for(int i = 0, n = displayValue.length() ; i < n ; i++) { 
 		//	char c = displayValue.charAt(i); 
-			//pushWithShow(st, String.valueOf(c));
-		System.out.println(convertingInfixToPostfix());
+		//pushWithShow(st, String.valueOf(c));
+		//System.out.println(convertingInfixToPostfix());
+		evaluatingAPostfixExpression();
 	}
 
 	/**

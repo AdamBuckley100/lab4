@@ -112,7 +112,7 @@ public class UserInterface implements ActionListener
 	 */
 	public void actionPerformed(ActionEvent event)
 	{
-		System.out.println("mm");
+		System.out.println("");
 		String command = event.getActionCommand();
 
 		if(command.equals("0") ||
@@ -137,7 +137,10 @@ public class UserInterface implements ActionListener
 		else if(command.equals("-"))
 			calc.minus();
 		else if(command.equals("="))
+		{
 			calc.equals();
+			redisplay();
+		}
 		else if(command.equals("C"))
 			calc.clear();
 		else if(command.equals("×"))
