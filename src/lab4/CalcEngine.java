@@ -27,6 +27,8 @@ public class CalcEngine
 
 	public String convertingInfixToPostfix()
 	{
+		Scanner sc = new Scanner(displayValue);
+		
 		String result = "";
 		Stack<Character> st = new Stack<Character>();
 		// scan the infix for left to right
@@ -34,19 +36,26 @@ public class CalcEngine
 		{
 			char c = displayValue.charAt(i);
 			// if the scanned character is an operand, add it to the postfix string called displayValue
+		
 			if (Character.isDigit(c))
 			{
+				//double d = sc.nextDouble();
+				//String doubleInString = Double.toString(d);
 				result += c;
+				//int l = doubleInString.length();
+				//i = (i+l)-1;
 			}
 			else
 			{
 				if (st.isEmpty())
 				{
 					pushWithShow(st,c);
+					result += ' ';
 				}
 				else if (!st.isEmpty() && displayValue.length() == i+1)
 				{
 					pushWithShow(st,c);
+					result += ' ';
 				}
 				else
 				{
@@ -57,11 +66,13 @@ public class CalcEngine
 					}
 					// push to stack
 					pushWithShow(st, c);
+					result += ' ';
 				}
 			}
 		}
 		while (!st.isEmpty())
 		{
+			result += ' ';
 			char popedChar = popWithShow(st);
 			result += popedChar;
 		}
@@ -72,52 +83,53 @@ public class CalcEngine
 	public void evaluatingAPostfixExpression()
 	{
 		String thePostfixExpression = convertingInfixToPostfix();
-		Stack<Character> st = new Stack<Character>();
-
+		Stack<String> st = new Stack<String>();
 		// this stack (which is the same stack) should be empty as the 
 		// stack is empty at the end of the convertingInfixToPostfix method.
-
-		// scan the infix for left to right
-		System.out.println("hii" + thePostfixExpression);
-		for(int i = 0 ; i < thePostfixExpression.length() ; i++)
-		{
-			char c = thePostfixExpression.charAt(i);
-			if (Character.isDigit(c))
+		System.out.println("hi....." + thePostfixExpression);
+		//for(int i = 0 ; i < thePostfixExpression.length() ; i++)
+		//{
+			String[] arrayOfStrings = thePostfixExpression.split(" ");
+			
+			for (int p = 0 ; p < arrayOfStrings.length ; p++)
 			{
-				pushWithShow(st,c);
-			}
-			else
-			{
-				// c right now is an operator represented as a char
-				int tempOne = Character.getNumericValue(popWithShow(st));
-				int tempTwo = Character.getNumericValue(popWithShow(st));
-
-				int result = 0;
-
-				//good place for a switch
-
-				switch (c)
-				{
-				case '+': result = tempOne + tempTwo;
-				break;
-				case '-': result = tempOne - tempTwo;
-				break;
-				case '×': result = tempOne * tempTwo;
-				break;
-				case '/': result = (tempOne/tempTwo);
-				break;
-				case '^': result = (int) Math.pow(tempOne, tempTwo);
+				System.out.println(arrayOfStrings[p]);
+				char ch = arrayOfStrings[p].charAt(0);
+				
+				if (Character.isDigit(ch))
+				{ 
+					st.push(arrayOfStrings[p]);
 				}
 				
-				char resultInChar = Character.forDigit(result, 10);
-				pushWithShow(st,resultInChar);
+				if (!Character.isDigit(ch))
+				{
+					int tempOne = Character.getNumericValue(popWithShow(st));
+					int tempTwo = Character.getNumericValue(popWithShow(st));	
+					
+					int result = 0;
+
+					//good place for a switch
+
+					switch (ch)
+					{
+					case '+': result = tempOne + tempTwo;
+					break;
+					case '-': result = tempOne - tempTwo;
+					break;
+					case '×': result = tempOne * tempTwo;
+					break;
+					case '/': result = (tempOne/tempTwo);
+					break;
+					case '^': result = (int) Math.pow(tempOne, tempTwo);
+					}
+					
+					char resultInChar = Character.forDigit(result, 10);
+					pushWithShow(st,resultInChar);
 			}
 		}
 		System.out.println("final result pop");
 		char finalResult = popWithShow(st);
-		//System.out.println("final result pop");
 		String finalResultInString = Character.toString(finalResult);
-		//int finalResultInInt = Integer.valueOf(finalResult);
 		displayValue = finalResultInString;
 	}
 
