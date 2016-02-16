@@ -4,8 +4,10 @@ import java.util.*;
 /**
  * The main part of the calculator doing the calculations.
  * 
- * @author  Adam Buckley (20062910) - WIT college
- * @version 0.1 (incomplete)
+ * @author  Adam Buckley (20062910)
+ * @version 1.0
+ * @Date - Start Date: 09/02/2016
+ * @Date - End Date: 16/02/2016
  */
 public class CalcEngine
 {
@@ -13,6 +15,7 @@ public class CalcEngine
 
 	String displayValue = "";
 
+	// A hashmap mapping the priority of the operators (BIMDAS).
 	static HashMap<Character,Integer> priority = setPriorityOfOperands();
 
 	/**
@@ -34,11 +37,11 @@ public class CalcEngine
 		{
 			char c = displayValue.charAt(i);
 			// if the scanned character is an operand, add it to the postfix string called displayValue
-			
+
 			if (Character.isDigit(c) || c == '.')
 			{
 				result += c;
-				
+
 				if (i != displayValue.length() - 1)
 				{
 					char d = displayValue.charAt(i+1);
@@ -76,7 +79,7 @@ public class CalcEngine
 						System.out.println("BBBBBBBBBBBBBBBBBBBBBBBBBB");
 					}
 					while (peekWithShow(st) != '(');
-					
+
 					// now discard the ) on the stack:
 					popWithShow(st);
 				}
@@ -196,6 +199,11 @@ public class CalcEngine
 		priority.put('÷',2);
 
 		priority.put('×',2);
+		
+		priority.put('^', 3);
+		
+		// BIMDAS so indices ^ is 3, multiplication is 2 and so is division and finally addition
+		// and subtraction are both 1. ( always will have lowest.
 
 		return priority;
 	}
@@ -233,10 +241,7 @@ public class CalcEngine
 	public void dotPressed()
 	{
 		displayValue += ".";
-		
-		// do something to now print a dot to the string displayValue Running total String....
-		
-		
+		// do something to now print a dot to the string displayValue Running total String.
 	}
 
 	public void divide()
@@ -331,7 +336,7 @@ public class CalcEngine
 		System.out.println("stack: " + st);
 		return a;
 	}
-	
+
 	static void pushWithShow(Stack<String> st, String a) {
 		st.push(a);
 		System.out.println("push(" + a + ")");
@@ -350,7 +355,7 @@ public class CalcEngine
 		char p = st.peek();
 		return p;
 	}
-	
+
 	static String peekWithShows(Stack<String> st) {
 		String p = st.peek();
 		return p;
