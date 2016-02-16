@@ -34,7 +34,7 @@ public class CalcEngine
 		{
 			char c = displayValue.charAt(i);
 			// if the scanned character is an operand, add it to the postfix string called displayValue
-
+			
 			if (Character.isDigit(c) || c == '.')
 			{
 				//double d = sc.nextDouble();
@@ -43,6 +43,22 @@ public class CalcEngine
 				//int l = doubleInString.length();
 				//i = (i+l)-1;
 			}
+			/*else if (c == '(')
+			{
+				pushWithShow(st, c);
+			}
+			else if (c == ')')
+			{
+				do
+				{
+					displayValue += popWithShow(st);
+					System.out.println("BBBBBBBBBBBBBBBBBBBBBBBBBB");
+				}
+				while (peekWithShow(st) != '(');
+				
+				// now discard the ) on the stack:
+				popWithShow(st);
+			}*/
 			else
 			{
 				if (st.isEmpty())
@@ -55,8 +71,24 @@ public class CalcEngine
 					pushWithShow(st,c);
 					result += ' ';
 				}
+				else if (c == ')')
+				{
+					// if a ) is hit a special action must be taken: all operands on the stack MUST
+					// be taken off the stack until a peek reveals a ( on the stack. when a peek reveals
+					// a (, you must destroy the ( from the stack too.
+					do
+					{
+						displayValue += popWithShow(st);
+						System.out.println("BBBBBBBBBBBBBBBBBBBBBBBBBB");
+					}
+					while (peekWithShow(st) != '(');
+					
+					// now discard the ) on the stack:
+					popWithShow(st);
+				}
 				else
 				{
+					System.out.println("HERE??");
 					while (!st.isEmpty() && comparePriorityOfOperands(peekWithShow(st),c))
 					{
 						char popedChar = popWithShow(st);
@@ -67,7 +99,11 @@ public class CalcEngine
 					result += ' ';
 				}
 			}
+			System.out.println("display value: " + displayValue);
+			System.out.println("result: " + result);
 		}
+		//gets to this while is theres only operands on the stack left to be taken off and 
+		//put on the output string and nothing else left to do.
 		while (!st.isEmpty())
 		{
 			result += ' ';
@@ -318,6 +354,11 @@ public class CalcEngine
 
 	static char peekWithShow(Stack<Character> st) {
 		char p = st.peek();
+		return p;
+	}
+	
+	static String peekWithShows(Stack<String> st) {
+		String p = st.peek();
 		return p;
 	}
 }
