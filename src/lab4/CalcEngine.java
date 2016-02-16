@@ -38,7 +38,13 @@ public class CalcEngine
 			if (Character.isDigit(c) || c == '.')
 			{
 				result += c;
-				result += ' ';
+				
+				char d = displayValue.charAt(i+1);
+				if (!(Character.isDigit(d) || d == '.'))
+				{
+					result += ' ';
+				}
+				// else keep going down ... straight past the else directly below.
 			}
 			else
 			{
