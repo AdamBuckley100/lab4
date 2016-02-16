@@ -37,28 +37,8 @@ public class CalcEngine
 			
 			if (Character.isDigit(c) || c == '.')
 			{
-				//double d = sc.nextDouble();
-				//String doubleInString = Double.toString(d);
 				result += c;
-				//int l = doubleInString.length();
-				//i = (i+l)-1;
 			}
-			/*else if (c == '(')
-			{
-				pushWithShow(st, c);
-			}
-			else if (c == ')')
-			{
-				do
-				{
-					displayValue += popWithShow(st);
-					System.out.println("BBBBBBBBBBBBBBBBBBBBBBBBBB");
-				}
-				while (peekWithShow(st) != '(');
-				
-				// now discard the ) on the stack:
-				popWithShow(st);
-			}*/
 			else
 			{
 				if (st.isEmpty())
@@ -66,10 +46,9 @@ public class CalcEngine
 					pushWithShow(st,c);
 					result += ' ';
 				}
-				else if (!st.isEmpty() && displayValue.length() == i+1)
+				else if (c == '(')
 				{
-					pushWithShow(st,c);
-					result += ' ';
+					pushWithShow(st, c);
 				}
 				else if (c == ')')
 				{
@@ -78,7 +57,7 @@ public class CalcEngine
 					// a (, you must destroy the ( from the stack too.
 					do
 					{
-						displayValue += popWithShow(st);
+						result += popWithShow(st);
 						System.out.println("BBBBBBBBBBBBBBBBBBBBBBBBBB");
 					}
 					while (peekWithShow(st) != '(');
@@ -110,7 +89,7 @@ public class CalcEngine
 			char popedChar = popWithShow(st);
 			result += popedChar;
 		}
-		System.out.println(result + "jjj");
+		System.out.println(result + "end of infix to postfix");
 		return result;
 	}
 
@@ -175,7 +154,7 @@ public class CalcEngine
 
 	public boolean comparePriorityOfOperands(char a, char b)
 	{
-		if (priority.get(a) > priority.get(b))
+		if (priority.get(a) >= priority.get(b))
 		{
 			return true;
 		}
@@ -196,8 +175,8 @@ public class CalcEngine
 
 		priority.put('-',1);
 
-		priority.put('(',4);
-		priority.put(')',4);
+		priority.put('(',0);
+	//priority.put(')',4);
 
 		priority.put('÷',2);
 
