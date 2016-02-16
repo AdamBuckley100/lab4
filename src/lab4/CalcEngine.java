@@ -38,13 +38,13 @@ public class CalcEngine
 			if (Character.isDigit(c) || c == '.')
 			{
 				result += c;
+				result += ' ';
 			}
 			else
 			{
 				if (st.isEmpty())
 				{
 					pushWithShow(st,c);
-					result += ' ';
 				}
 				else if (c == '(')
 				{
@@ -55,9 +55,11 @@ public class CalcEngine
 					// if a ) is hit a special action must be taken: all operands on the stack MUST
 					// be taken off the stack until a peek reveals a ( on the stack. when a peek reveals
 					// a (, you must destroy the ( from the stack too.
+					//result += ' ';
 					do
 					{
 						result += popWithShow(st);
+						result += ' ';
 						System.out.println("BBBBBBBBBBBBBBBBBBBBBBBBBB");
 					}
 					while (peekWithShow(st) != '(');
@@ -72,10 +74,10 @@ public class CalcEngine
 					{
 						char popedChar = popWithShow(st);
 						result += popedChar;
+						result += ' ';
 					}
 					// push to stack
 					pushWithShow(st, c);
-					result += ' ';
 				}
 			}
 			System.out.println("display value: " + displayValue);
@@ -85,7 +87,7 @@ public class CalcEngine
 		//put on the output string and nothing else left to do.
 		while (!st.isEmpty())
 		{
-			result += ' ';
+			//result += ' ';
 			char popedChar = popWithShow(st);
 			result += popedChar;
 		}
@@ -176,7 +178,6 @@ public class CalcEngine
 		priority.put('-',1);
 
 		priority.put('(',0);
-	//priority.put(')',4);
 
 		priority.put('÷',2);
 
