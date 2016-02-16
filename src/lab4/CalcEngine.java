@@ -90,6 +90,7 @@ public class CalcEngine
 			//result += ' ';
 			char popedChar = popWithShow(st);
 			result += popedChar;
+			result += ' ';
 		}
 		System.out.println(result + "end of infix to postfix");
 		return result;
