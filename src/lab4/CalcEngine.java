@@ -4,7 +4,7 @@ import java.util.*;
 /**
  * The main part of the calculator doing the calculations.
  * 
- * @author  Adam Buckley (20062910) - WIT
+ * @author  Adam Buckley (20062910) - WIT college
  * @version 0.1 (incomplete)
  */
 public class CalcEngine
