@@ -306,7 +306,7 @@ public class CalcEngine
 	 */
 	public String getAuthor()
 	{
-		return(" ");
+		return("Adam Buckley");
 	}
 
 	public String getDisplayValue()

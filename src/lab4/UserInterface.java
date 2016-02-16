@@ -60,6 +60,7 @@ public class UserInterface implements ActionListener
 		display = new JTextField();
 		contentPane.add(display, BorderLayout.NORTH);
 
+		// change 5  to 6 if you want new row
 		JPanel buttonPanel = new JPanel(new GridLayout(5, 4));
 
 		addButton(buttonPanel, "C");
@@ -87,6 +88,8 @@ public class UserInterface implements ActionListener
 		addButton(buttonPanel, ".");
 		addButton(buttonPanel, "^");
 		addButton(buttonPanel, "=");
+		
+		//addButton(buttonPanel, "Del. Last Char");
 
 		contentPane.add(buttonPanel, BorderLayout.CENTER);
 
