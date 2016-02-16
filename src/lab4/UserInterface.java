@@ -66,7 +66,7 @@ public class UserInterface implements ActionListener
 		addButton(buttonPanel, "(");
 		addButton(buttonPanel, ")");
 		// ÷ is exact same as /
-		addButton(buttonPanel, "/");
+		addButton(buttonPanel, "÷");
 
 		addButton(buttonPanel, "7");
 		addButton(buttonPanel, "8");
@@ -146,6 +146,8 @@ public class UserInterface implements ActionListener
 		else if(command.equals("×"))
 			calc.multiply();
 		else if(command.equals("/"))
+			calc.divide();
+		else if(command.equals("÷"))
 			calc.divide();
 		else if(command.equals("("))
 			calc.openBracket();

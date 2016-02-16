@@ -27,8 +27,6 @@ public class CalcEngine
 
 	public String convertingInfixToPostfix()
 	{
-		Scanner sc = new Scanner(displayValue);
-
 		String result = "";
 		Stack<Character> st = new Stack<Character>();
 		// scan the infix for left to right
@@ -37,7 +35,7 @@ public class CalcEngine
 			char c = displayValue.charAt(i);
 			// if the scanned character is an operand, add it to the postfix string called displayValue
 
-			if (Character.isDigit(c))
+			if (Character.isDigit(c) || c == '.')
 			{
 				//double d = sc.nextDouble();
 				//String doubleInString = Double.toString(d);
@@ -86,7 +84,7 @@ public class CalcEngine
 		Stack<String> st = new Stack<String>();
 		// this stack (which is the same stack) should be empty as the 
 		// stack is empty at the end of the convertingInfixToPostfix method.
-		System.out.println("hi....." + thePostfixExpression);
+		System.out.println("hi.....    " + thePostfixExpression);
 		//for(int i = 0 ; i < thePostfixExpression.length() ; i++)
 		//{
 		String[] arrayOfStrings = thePostfixExpression.split(" ");
@@ -98,23 +96,23 @@ public class CalcEngine
 
 			if (Character.isDigit(ch))
 			{ 
-				st.push(arrayOfStrings[p]);
+				pushWithShow(st, arrayOfStrings[p]);
 			}
 
 			if (!Character.isDigit(ch))
 			{
-				String tempOne = st.pop();
-				String tempTwo = st.pop();
+				String tempTwo = thePopWithShow(st);
+				String tempOne = thePopWithShow(st);
 
 				//int tempTwo = Character.getNumericValue(popWithShow(st));
 				//int tempOne = Character.getNumericValue(popWithShow(st));	
 
-				int result = 0;
+				double result = 0;
 
 				//good place for a switch
 
-				int temp1 = Integer.valueOf(tempOne);
-				int temp2 = Integer.valueOf(tempTwo);
+				double temp1 = Double.valueOf(tempOne);
+				double temp2 = Double.valueOf(tempTwo);
 
 				switch (ch)
 				{
@@ -126,14 +124,16 @@ public class CalcEngine
 				break;
 				case '/': result = (temp1/temp2);
 				break;
+				case '÷': result = (temp1/temp2);
+				break;
 				case '^': result = (int) Math.pow(temp1, temp2);
 				}
-				
-				String resultInString = Integer.toString(result);
-				st.push(resultInString);
+
+				String resultInString = Double.toString(result);
+				pushWithShow(st, resultInString);
 			}
 		}
-		String finalResultInString = st.pop();
+		String finalResultInString = thePopWithShow(st);
 		displayValue = finalResultInString;
 	}
 
@@ -203,6 +203,10 @@ public class CalcEngine
 	public void dotPressed()
 	{
 		displayValue += ".";
+		
+		// do something to now print a dot to the string displayValue Running total String....
+		
+		
 	}
 
 	public void divide()
@@ -250,7 +254,7 @@ public class CalcEngine
 	{
 		// simply resets the displayValue String to an empty string so user can start
 		// all over inputting a completely new sum.
-        displayValue = "";
+		displayValue = "";
 	}
 
 	/**
@@ -293,6 +297,20 @@ public class CalcEngine
 	static char popWithShow(Stack<Character> st) {
 		System.out.print("pop -> ");
 		char a = (char) st.pop();
+		System.out.println(a);
+		System.out.println("stack: " + st);
+		return a;
+	}
+	
+	static void pushWithShow(Stack<String> st, String a) {
+		st.push(a);
+		System.out.println("push(" + a + ")");
+		System.out.println("stack: " + st);
+	}
+
+	static String thePopWithShow(Stack<String> st) {
+		System.out.print("pop -> ");
+		String a = st.pop();
 		System.out.println(a);
 		System.out.println("stack: " + st);
 		return a;
