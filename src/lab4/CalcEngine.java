@@ -28,7 +28,7 @@ public class CalcEngine
 	public String convertingInfixToPostfix()
 	{
 		Scanner sc = new Scanner(displayValue);
-		
+
 		String result = "";
 		Stack<Character> st = new Stack<Character>();
 		// scan the infix for left to right
@@ -36,7 +36,7 @@ public class CalcEngine
 		{
 			char c = displayValue.charAt(i);
 			// if the scanned character is an operand, add it to the postfix string called displayValue
-		
+
 			if (Character.isDigit(c))
 			{
 				//double d = sc.nextDouble();
@@ -89,47 +89,53 @@ public class CalcEngine
 		System.out.println("hi....." + thePostfixExpression);
 		//for(int i = 0 ; i < thePostfixExpression.length() ; i++)
 		//{
-			String[] arrayOfStrings = thePostfixExpression.split(" ");
-			
-			for (int p = 0 ; p < arrayOfStrings.length ; p++)
+		String[] arrayOfStrings = thePostfixExpression.split(" ");
+
+		for (int p = 0 ; p < arrayOfStrings.length ; p++)
+		{
+			System.out.println(arrayOfStrings[p]);
+			char ch = arrayOfStrings[p].charAt(0);
+
+			if (Character.isDigit(ch))
+			{ 
+				st.push(arrayOfStrings[p]);
+			}
+
+			if (!Character.isDigit(ch))
 			{
-				System.out.println(arrayOfStrings[p]);
-				char ch = arrayOfStrings[p].charAt(0);
-				
-				if (Character.isDigit(ch))
-				{ 
-					st.push(arrayOfStrings[p]);
-				}
-				
-				if (!Character.isDigit(ch))
+				String tempOne = st.pop();
+				String tempTwo = st.pop();
+
+				//int tempTwo = Character.getNumericValue(popWithShow(st));
+				//int tempOne = Character.getNumericValue(popWithShow(st));	
+
+				int result = 0;
+
+				//good place for a switch
+
+				int temp1 = Integer.valueOf(tempOne);
+				int temp2 = Integer.valueOf(tempTwo);
+
+				switch (ch)
 				{
-					int tempOne = Character.getNumericValue(popWithShow(st));
-					int tempTwo = Character.getNumericValue(popWithShow(st));	
-					
-					int result = 0;
+				case '+': result = temp1 + temp2;
+				break;
+				case '-': result = temp1 - temp2;
+				break;
+				case '×': result = temp1 * temp2;
+				break;
+				case '/': result = (temp1/temp2);
+				break;
+				case '^': result = (int) Math.pow(temp1, temp2);
+				}
 
-					//good place for a switch
-
-					switch (ch)
-					{
-					case '+': result = tempOne + tempTwo;
-					break;
-					case '-': result = tempOne - tempTwo;
-					break;
-					case '×': result = tempOne * tempTwo;
-					break;
-					case '/': result = (tempOne/tempTwo);
-					break;
-					case '^': result = (int) Math.pow(tempOne, tempTwo);
-					}
-					
-					char resultInChar = Character.forDigit(result, 10);
-					pushWithShow(st,resultInChar);
+				//char resultInChar = Character.forDigit(result, 10);
+				String resultInString = Integer.toString(result);
+				st.push(resultInString);
 			}
 		}
 		System.out.println("final result pop");
-		char finalResult = popWithShow(st);
-		String finalResultInString = Character.toString(finalResult);
+		String finalResultInString = st.pop();
 		displayValue = finalResultInString;
 	}
 
