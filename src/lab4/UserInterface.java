@@ -88,7 +88,7 @@ public class UserInterface implements ActionListener
 		addButton(buttonPanel, ".");
 		addButton(buttonPanel, "^");
 		addButton(buttonPanel, "=");
-		
+
 		//addButton(buttonPanel, "Del. Last Char");
 
 		contentPane.add(buttonPanel, BorderLayout.CENTER);

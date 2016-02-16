@@ -199,9 +199,9 @@ public class CalcEngine
 		priority.put('÷',2);
 
 		priority.put('×',2);
-		
-		priority.put('^', 3);
-		
+
+		//priority.put('^', 3);
+
 		// BIMDAS so indices ^ is 3, multiplication is 2 and so is division and finally addition
 		// and subtraction are both 1. ( always will have lowest.
 
