@@ -4,7 +4,7 @@ import java.util.*;
 /**
  * The main part of the calculator doing the calculations.
  * 
- * @author  M. Kolling 
+ * @author  Adam Buckley (20062910)
  * @version 0.1 (incomplete)
  */
 public class CalcEngine
@@ -128,13 +128,11 @@ public class CalcEngine
 				break;
 				case '^': result = (int) Math.pow(temp1, temp2);
 				}
-
-				//char resultInChar = Character.forDigit(result, 10);
+				
 				String resultInString = Integer.toString(result);
 				st.push(resultInString);
 			}
 		}
-		System.out.println("final result pop");
 		String finalResultInString = st.pop();
 		displayValue = finalResultInString;
 	}
@@ -250,6 +248,9 @@ public class CalcEngine
 	 */
 	public void clear()
 	{
+		// simply resets the displayValue String to an empty string so user can start
+		// all over inputting a completely new sum.
+        displayValue = "";
 	}
 
 	/**
