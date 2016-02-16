@@ -39,8 +39,15 @@ public class CalcEngine
 			{
 				result += c;
 				
-				char d = displayValue.charAt(i+1);
-				if (!(Character.isDigit(d) || d == '.'))
+				if (i != displayValue.length() - 1)
+				{
+					char d = displayValue.charAt(i+1);
+					if (!(Character.isDigit(d) || d == '.'))
+					{
+						result += ' ';
+					}
+				}
+				else
 				{
 					result += ' ';
 				}
