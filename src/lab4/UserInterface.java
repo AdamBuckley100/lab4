@@ -61,7 +61,7 @@ public class UserInterface implements ActionListener
 		contentPane.add(display, BorderLayout.NORTH);
 
 		// change 5  to 6 if you want new row
-		JPanel buttonPanel = new JPanel(new GridLayout(5, 4));
+		JPanel buttonPanel = new JPanel(new GridLayout(6, 4));
 
 		addButton(buttonPanel, "C");
 		addButton(buttonPanel, "(");
@@ -89,7 +89,7 @@ public class UserInterface implements ActionListener
 		addButton(buttonPanel, "^");
 		addButton(buttonPanel, "=");
 
-		//addButton(buttonPanel, "Del. Last Char");
+		addButton(buttonPanel, "Del Last Char");
 
 		contentPane.add(buttonPanel, BorderLayout.CENTER);
 
@@ -158,6 +158,8 @@ public class UserInterface implements ActionListener
 			calc.closeBracket();
 		else if(command.equals("^"))
 			calc.caret();
+		else if(command.equals("Del Last Char"))
+			calc.delLastChar();
 		redisplay();
 	}
 

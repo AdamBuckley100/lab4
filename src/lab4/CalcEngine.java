@@ -27,6 +27,19 @@ public class CalcEngine
 		//Stack st = new Stack();
 		//operator =' ';
 	}
+	
+	// This method deletes the very last character that the user has inputted. (clicked)
+	public void delLastChar()
+	{
+		//char a = String.valueOf(displayValue);
+		//String a = displayValue.charAt(displayValue.length());
+		//char[] charArray = displayValue.toCharArray();
+		//charArray.splice(, 1);
+		
+		//displayValue.length()-2 is the entire current displayValue string excluding the
+		//very last string variable.
+		displayValue = displayValue.substring(0, displayValue.length()-1);
+	}
 
 	public String convertingInfixToPostfix()
 	{
