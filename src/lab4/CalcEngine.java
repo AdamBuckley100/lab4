@@ -51,6 +51,7 @@ public class CalcEngine
 		for(int i = 0; i < displayValue.length() ; i++)
 		{
 			char c = displayValue.charAt(i);
+			System.out.print("kkkkkkk" + displayValue.charAt(i) + "kk");
 			// if the scanned character is an operand, add it to the postfix string called displayValue
 
 			if (Character.isDigit(c) || c == '.')
@@ -94,8 +95,12 @@ public class CalcEngine
 						result += popWithShow(st);
 						result += " ";
 						System.out.println("BBBBBBBBBBBBBBBBBBBBBBBBBB");
+						System.out.println("*" + peekWithShow(st) + "*");
+						System.out.println("*" + peekWithShow(st).getClass().getName() + "*");
 					}
-					while (peekWithShow(st) != "(");
+					while (!peekWithShow(st).equals("("));
+					// The line above: IT'S VERY IMPORTANT THAT WITH STRING COMPARING YPU USE THE .equals and
+					// NEVER USE != or == etc.! STRING COMPARE USES .EQUALS ONLY!!!!
 
 					// now discard the ) on the stack:
 					popWithShow(st);
@@ -192,9 +197,10 @@ public class CalcEngine
 		displayValue = finalResultInString;
 	}
 
-	public boolean comparePriorityOfOperands(String string, String c)
+	public boolean comparePriorityOfOperands(String theString, String c)
 	{
-		if (priority.get(string) >= priority.get(c))
+		System.out.println("jjjjjj" + priority.get(theString));
+		if (priority.get(theString) >= priority.get(c))
 		{
 			return true;
 		}
@@ -225,7 +231,12 @@ public class CalcEngine
 
 		// BIMDAS so indices ^ is 3, multiplication is 2 and so is division and finally addition
 		// and subtraction are both 1. ( always will have lowest.
-
+		System.out.println(priority.get("+"));
+		System.out.println(priority.get("-"));
+		System.out.println(priority.get("("));
+		System.out.println(priority.get("÷"));
+		System.out.println(priority.get("×"));
+		System.out.println(priority.get("^"));
 		return priority;
 	}
 
