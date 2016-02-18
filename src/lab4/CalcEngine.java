@@ -14,6 +14,8 @@ public class CalcEngine
 	char operator;
 
 	String displayValue = "";
+	// the default status of a boolean is false.
+	boolean hasEqualsBeenPressed = false;
 
 	// A hashmap mapping the priority of the operators (BIMDAS).
 	static HashMap<Character,Integer> priority = setPriorityOfOperands();
@@ -182,6 +184,10 @@ public class CalcEngine
 			}
 		}
 		String finalResultInString = thePopWithShow(st);
+		if (finalResultInString.endsWith(".0"))
+		{
+			finalResultInString = finalResultInString.substring(0, finalResultInString.length() - 2);
+		}
 		displayValue = finalResultInString;
 	}
 
@@ -293,6 +299,7 @@ public class CalcEngine
 		//	char c = displayValue.charAt(i); 
 		//pushWithShow(st, String.valueOf(c));
 		//System.out.println(convertingInfixToPostfix());
+		setHasEqualsBeenPressed(true);
 		evaluatingAPostfixExpression();
 	}
 
@@ -301,6 +308,7 @@ public class CalcEngine
 	 */
 	public void clear()
 	{
+		setHasEqualsBeenPressed(false);
 		// simply resets the displayValue String to an empty string so user can start
 		// all over inputting a completely new sum.
 		displayValue = "";
@@ -326,6 +334,16 @@ public class CalcEngine
 	public String getDisplayValue()
 	{
 		return displayValue;
+	}
+	
+	public boolean getHasEqualsBeenPressed()
+	{
+		return hasEqualsBeenPressed;
+	}
+	
+	public void setHasEqualsBeenPressed(boolean trueOrFalse)
+	{
+		hasEqualsBeenPressed = trueOrFalse;
 	}
 
 	/**

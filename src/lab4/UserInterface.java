@@ -159,7 +159,16 @@ public class UserInterface implements ActionListener
 		else if(command.equals("^"))
 			calc.caret();
 		else if(command.equals("Del Last Char"))
+			// the below if statement does not allow a user to delete last character
+			// when the answer is displayed on the screen.
+			if (calc.getHasEqualsBeenPressed() == false)
+			{
 			calc.delLastChar();
+			}
+			else
+			{
+				// do nothing
+			}
 		redisplay();
 	}
 
