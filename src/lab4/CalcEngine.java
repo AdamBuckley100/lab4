@@ -18,7 +18,7 @@ public class CalcEngine
 	boolean hasEqualsBeenPressed = false;
 
 	// A hashmap mapping the priority of the operators (BIMDAS).
-	static HashMap<Character,Integer> priority = setPriorityOfOperands();
+	static HashMap<String,Integer> priority = setPriorityOfOperands();
 
 	/**
 	 * Create a CalcEngine instance. Initialise its state so that it is ready 
@@ -46,7 +46,7 @@ public class CalcEngine
 	public String convertingInfixToPostfix()
 	{
 		String result = "";
-		Stack<Character> st = new Stack<Character>();
+		MyStack st = new MyStack(100);
 		// scan the infix for left to right
 		for(int i = 0; i < displayValue.length() ; i++)
 		{
@@ -62,12 +62,12 @@ public class CalcEngine
 					char d = displayValue.charAt(i+1);
 					if (!(Character.isDigit(d) || d == '.'))
 					{
-						result += ' ';
+						result += " ";
 					}
 				}
 				else
 				{
-					result += ' ';
+					result += " ";
 				}
 				// else keep going down ... straight past the else directly below.
 			}
@@ -75,11 +75,13 @@ public class CalcEngine
 			{
 				if (st.isEmpty())
 				{
-					pushWithShow(st,c);
+					String o = String.valueOf(c);
+					pushWithShow(st,o);
 				}
 				else if (c == '(')
 				{
-					pushWithShow(st, c);
+					String o = String.valueOf(c);
+					pushWithShow(st,o);
 				}
 				else if (c == ')')
 				{
@@ -90,10 +92,10 @@ public class CalcEngine
 					do
 					{
 						result += popWithShow(st);
-						result += ' ';
+						result += " ";
 						System.out.println("BBBBBBBBBBBBBBBBBBBBBBBBBB");
 					}
-					while (peekWithShow(st) != '(');
+					while (peekWithShow(st) != "(");
 
 					// now discard the ) on the stack:
 					popWithShow(st);
@@ -101,14 +103,14 @@ public class CalcEngine
 				else
 				{
 					System.out.println("HERE??");
-					while (!st.isEmpty() && comparePriorityOfOperands(peekWithShow(st),c))
+					while (!st.isEmpty() && comparePriorityOfOperands(peekWithShow(st),String.valueOf(c)))
 					{
-						char popedChar = popWithShow(st);
+						String popedChar = popWithShow(st);
 						result += popedChar;
-						result += ' ';
+						result += " ";
 					}
 					// push to stack
-					pushWithShow(st, c);
+					pushWithShow(st, String.valueOf(c));
 				}
 			}
 			System.out.println("display value: " + displayValue);
@@ -119,9 +121,9 @@ public class CalcEngine
 		while (!st.isEmpty())
 		{
 			//result += ' ';
-			char popedChar = popWithShow(st);
+			String popedChar = popWithShow(st);
 			result += popedChar;
-			result += ' ';
+			result += " ";
 		}
 		System.out.println(result + "end of infix to postfix");
 		return result;
@@ -130,7 +132,7 @@ public class CalcEngine
 	public void evaluatingAPostfixExpression()
 	{
 		String thePostfixExpression = convertingInfixToPostfix();
-		Stack<String> st = new Stack<String>();
+		MyStack st = new MyStack(100);
 		// this stack (which is the same stack) should be empty as the 
 		// stack is empty at the end of the convertingInfixToPostfix method.
 		System.out.println("hi.....    " + thePostfixExpression);
@@ -151,8 +153,8 @@ public class CalcEngine
 
 			if (!Character.isDigit(ch))
 			{
-				String tempTwo = thePopWithShow(st);
-				String tempOne = thePopWithShow(st);
+				String tempTwo = popWithShow(st);
+				String tempOne = popWithShow(st);
 
 				//int tempTwo = Character.getNumericValue(popWithShow(st));
 				//int tempOne = Character.getNumericValue(popWithShow(st));	
@@ -178,12 +180,11 @@ public class CalcEngine
 				break;
 				case '^': result = Math.pow(temp1, temp2);
 				}
-
 				String resultInString = Double.toString(result);
 				pushWithShow(st, resultInString);
 			}
 		}
-		String finalResultInString = thePopWithShow(st);
+		String finalResultInString = popWithShow(st);
 		if (finalResultInString.endsWith(".0"))
 		{
 			finalResultInString = finalResultInString.substring(0, finalResultInString.length() - 2);
@@ -191,9 +192,9 @@ public class CalcEngine
 		displayValue = finalResultInString;
 	}
 
-	public boolean comparePriorityOfOperands(char a, char b)
+	public boolean comparePriorityOfOperands(String string, String c)
 	{
-		if (priority.get(a) >= priority.get(b))
+		if (priority.get(string) >= priority.get(c))
 		{
 			return true;
 		}
@@ -203,24 +204,24 @@ public class CalcEngine
 		}	
 	}
 
-	public static HashMap<Character,Integer> setPriorityOfOperands()
+	public static HashMap<String,Integer> setPriorityOfOperands()
 	{
 		//BIMDAS - ORDER: 1) brackets 2) multiplication 3) division 4) addition (same as subtraction)
 		// 5) subtraction (same as addition).
 
-		HashMap<Character,Integer> priority = new HashMap<Character,Integer>();
+		HashMap<String,Integer> priority = new HashMap<String,Integer>();
 
-		priority.put('+',1);
+		priority.put("+",1);
 
-		priority.put('-',1);
+		priority.put("-",1);
 
-		priority.put('(',0);
+		priority.put("(",0);
 
-		priority.put('÷',2);
+		priority.put("÷",2);
 
-		priority.put('×',2);
+		priority.put("×",2);
 
-		priority.put('^', 3);
+		priority.put("^", 3);
 
 		// BIMDAS so indices ^ is 3, multiplication is 2 and so is division and finally addition
 		// and subtraction are both 1. ( always will have lowest.
@@ -271,13 +272,13 @@ public class CalcEngine
 
 	public void openBracket()
 	{
-		displayValue += '(';
+		displayValue += "(";
 	}
 
 	public void closeBracket()
 	{ 
 		//for some reason it must be ' and never "
-		displayValue += ')';
+		displayValue += ")";
 	}
 
 	public void dot()
@@ -355,27 +356,13 @@ public class CalcEngine
 		return("Ver. 1.0");
 	}
 
-	static void pushWithShow(Stack<Character> st, char a) {
-		st.push(a);
-		System.out.println("push(" + a + ")");
+	static void pushWithShow(MyStack st, String c) {
+		st.push(c);
+		System.out.println("push(" + c + ")");
 		System.out.println("stack: " + st);
 	}
 
-	static char popWithShow(Stack<Character> st) {
-		System.out.print("pop -> ");
-		char a = (char) st.pop();
-		System.out.println(a);
-		System.out.println("stack: " + st);
-		return a;
-	}
-
-	static void pushWithShow(Stack<String> st, String a) {
-		st.push(a);
-		System.out.println("push(" + a + ")");
-		System.out.println("stack: " + st);
-	}
-
-	static String thePopWithShow(Stack<String> st) {
+	static String popWithShow(MyStack st) {
 		System.out.print("pop -> ");
 		String a = st.pop();
 		System.out.println(a);
@@ -383,12 +370,7 @@ public class CalcEngine
 		return a;
 	}
 
-	static char peekWithShow(Stack<Character> st) {
-		char p = st.peek();
-		return p;
-	}
-
-	static String peekWithShows(Stack<String> st) {
+	static String peekWithShow(MyStack st) {
 		String p = st.peek();
 		return p;
 	}
