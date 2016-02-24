@@ -6,7 +6,7 @@ import javax.swing.*;
 import javax.swing.border.*;
 
 /**
- * A graphical user interface for the calculator. No calculation is being
+ * A graphical userr interface for the calculator. No calculation is being
  * done here. This class is responsible just for putting up the display on 
  * screen. It then refers to the "CalcEngine" to do all the real work.
  * 
