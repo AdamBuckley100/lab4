@@ -163,7 +163,7 @@ public class UserInterface implements ActionListener
 			// when the answer is displayed on the screen.
 			if (calc.getHasEqualsBeenPressed() == false)
 			{
-			calc.delLastChar();
+				calc.delLastChar();
 			}
 			else
 			{

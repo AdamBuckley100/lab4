@@ -12,28 +12,28 @@ import java.util.Arrays;
  */
 
 public class MyStack {
-	
+
 	private String[] myStackArray;
-	
+
 	private int stackSize;
-	
+
 	private int theTopOfStack = 0;
-	
+
 	public MyStack(int sizeOfStack)
 	{
 		stackSize = sizeOfStack;
-		
+
 		myStackArray = new String[sizeOfStack];
-		
+
 		Arrays.fill(myStackArray, "0");
 	}
-	
+
 	public void push (String input)
 	{
 		if(theTopOfStack + 1 < stackSize)
 		{
 			//theTopOfStack++;
-			
+
 			myStackArray[theTopOfStack++] = input;
 		}
 		else
@@ -49,9 +49,9 @@ public class MyStack {
 		if (theTopOfStack >= 0)
 		{
 			System.out.println(myStackArray[theTopOfStack-1] + " was removed from the stack");
-			
+
 			//myStackArray[theTopOfStack-1] = "0";
-			
+
 			return myStackArray[--theTopOfStack];
 		}
 		else
@@ -59,22 +59,21 @@ public class MyStack {
 			System.out.println("the stack is empty");
 			return null;
 		}
-			
 	}
-	
+
 	public String peek()
 	{
 		if (theTopOfStack > 0)
 		{
-		System.out.println("peek: " + myStackArray[theTopOfStack-1] + " is at the top of the stack");
-		return myStackArray[theTopOfStack-1];
+			System.out.println("peek: " + myStackArray[theTopOfStack-1] + " is at the top of the stack");
+			return myStackArray[theTopOfStack-1];
 		}
 		else
 		{
 			return null;
 		}
 	}
-	
+
 	public boolean isEmpty()
 	{
 		if (theTopOfStack == 0)
