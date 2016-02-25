@@ -6,17 +6,18 @@ import javax.swing.*;
 import javax.swing.border.*;
 
 /**
- * A graphical userr interface for the calculator. No calculation is being
+ * A graphical user interface for the calculator. No calculation is being
  * done here. This class is responsible just for putting up the display on 
- * screen. It then refers to the "CalcEngine" to do all the real work.
+ * screen and the buttons etc. It then refers to the "CalcEngine" to do all the real work.
  * 
- * @author Michael Kolling
- * @version 31 July 2000
+ * @author Adam Buckley
+ * @Date - Start Date: 09/02/2016
+ * @Date - End Date: 25/02/2016
+ * @version 1.0
  */
 public class UserInterface implements ActionListener
 {
 	private CalcEngine calc;
-	private boolean showingAuthor;
 
 	private JFrame frame;
 	private JTextField display;
@@ -27,12 +28,10 @@ public class UserInterface implements ActionListener
 	 */
 	public UserInterface(CalcEngine engine)
 	{
-		// I THINK THIS IS WHERE EVERYTHING BEGINS
-		System.out.println("setup");
 		calc = engine;
-		showingAuthor = true;
 		makeFrame();
 		frame.setVisible(true);
+		
 		// Below: Close the application when X is hit in the top right corner.
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	}
@@ -60,7 +59,6 @@ public class UserInterface implements ActionListener
 		display = new JTextField();
 		contentPane.add(display, BorderLayout.NORTH);
 
-		// change 5  to 6 if you want new row
 		JPanel buttonPanel = new JPanel(new GridLayout(6, 4));
 
 		addButton(buttonPanel, "C");
@@ -159,6 +157,7 @@ public class UserInterface implements ActionListener
 		else if(command.equals("^"))
 			calc.caret();
 		else if(command.equals("Del Last Char"))
+			
 			// the below if statement does not allow a user to delete last character
 			// when the answer is displayed on the screen.
 			if (calc.getHasEqualsBeenPressed() == false)
@@ -179,19 +178,5 @@ public class UserInterface implements ActionListener
 	private void redisplay()
 	{
 		display.setText("" + calc.getDisplayValue());
-	}
-
-	/**
-	 * Toggle the info display in the calculator's status area between the
-	 * author and version information.
-	 */
-	private void showInfo()
-	{
-		if(showingAuthor)
-			status.setText(calc.getVersion());
-		else
-			status.setText(calc.getAuthor());
-
-		showingAuthor = !showingAuthor;
 	}
 }

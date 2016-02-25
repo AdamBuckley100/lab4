@@ -3,10 +3,13 @@ package lab4;
 import java.util.Arrays;
 
 /** 
- * @author g Adam Buckley (20062910)
+ * This class is my array stack replacing the java API stack implementation.
+ * This stack is implemented using an array instead of using the stack class as implemented in the java API.
+ * 
+ * @author Adam Buckley (20062910)
  * @version 1.0
  * @Date - Start Date: 09/02/2016
- * @Date - End Date: 16/02/2016
+ * @Date - End Date: 25/02/2016
  */
 
 public class MyStack {
@@ -41,16 +44,17 @@ public class MyStack {
 		}
 	}
 
+	/**
+	 * pop removes what is on the top of the stack
+	 */
 	public String pop()
 	{
 		if (theTopOfStack >= 0)
 		{
 			System.out.println(myStackArray[theTopOfStack-1] + " was removed from the stack");
 
-			//myStackArray[theTopOfStack-1] = "0";
-
-			// The following decrement happens before the theTopOfTheSTack variable is used to get the position
-			// in the myStackArray to return.
+			// Specific decrementatio : The following decrement happens before the theTopOfTheSTack variable is used to get the position
+			// in the myStackArray of return.
 			return myStackArray[--theTopOfStack];
 		}
 		else
@@ -60,6 +64,12 @@ public class MyStack {
 		}
 	}
 
+	/**
+	 * peek checks what is on the top of the stack.
+	 * 
+	 * @return - returns a String variable, A String representation of the operator or operand on
+	 * the top of the stack.
+	 */
 	public String peek()
 	{
 		if (theTopOfStack > 0)
@@ -73,6 +83,12 @@ public class MyStack {
 		}
 	}
 
+	/**
+	 * Update the interface display to show the current value of the 
+	 * calculator.
+	 * 
+	 * @return - returns a boolean variable, true if stack is empty, false if it's not empty.
+	 */
 	public boolean isEmpty()
 	{
 		if (theTopOfStack == 0)

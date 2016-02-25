@@ -6,7 +6,7 @@ import java.util.Stack;
  * The main class of a simple calculator. Create one of these and you'll
  * get the calculator on screen.
  * 
- * @author Michael Kgolling
+ * @author Michael Kolling
  * @version 31 July 2000
  */
 public class Calculator
