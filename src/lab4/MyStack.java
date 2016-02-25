@@ -2,9 +2,7 @@ package lab4;
 
 import java.util.Arrays;
 
-/**
- * 
- * 
+/** 
  * @author  Adam Buckley (20062910)
  * @version 1.0
  * @Date - Start Date: 09/02/2016
@@ -32,8 +30,7 @@ public class MyStack {
 	{
 		if(theTopOfStack + 1 < stackSize)
 		{
-			//theTopOfStack++;
-
+			// the following increment happens after current the theTopOfStack variable has been used.
 			myStackArray[theTopOfStack++] = input;
 		}
 		else
@@ -52,6 +49,8 @@ public class MyStack {
 
 			//myStackArray[theTopOfStack-1] = "0";
 
+			// The following decrement happens before the theTopOfTheSTack variable is used to get the position
+			// in the myStackArray to return.
 			return myStackArray[--theTopOfStack];
 		}
 		else
