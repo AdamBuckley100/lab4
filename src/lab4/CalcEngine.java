@@ -4,8 +4,7 @@ import java.util.*;
 /**
  * The main part of the calculator doing the calculations.
  * 
- * @author  Adam Buckley (20062910)
- * @version 1.00
+ * @author  Adam
  * @Date - Start Date: 09/02/2016
  * @Date - End Date: 16/02/2016
  */
