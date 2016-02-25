@@ -33,7 +33,7 @@ public class Calculator
 
 	public static void main(String[] args)
 	{
-	    Stack st = new Stack();
+		Stack st = new Stack();
 		Calculator cTest;
 
 		cTest = new Calculator();

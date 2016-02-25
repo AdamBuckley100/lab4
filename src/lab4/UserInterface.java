@@ -10,6 +10,9 @@ import javax.swing.border.*;
  * done here. This class is responsible just for putting up the display on 
  * screen and the buttons etc. It then refers to the "CalcEngine" to do all the real work.
  * 
+ * Module: Data Structures
+ * References: Moodle Data Structures notes.
+ * 
  * @author Adam Buckley
  * @Date - Start Date: 09/02/2016
  * @Date - End Date: 25/02/2016
@@ -17,6 +20,7 @@ import javax.swing.border.*;
  */
 public class UserInterface implements ActionListener
 {
+	// this instance variable is to be called calc which is of type CalcEngine.
 	private CalcEngine calc;
 
 	private JFrame frame;
@@ -31,7 +35,7 @@ public class UserInterface implements ActionListener
 		calc = engine;
 		makeFrame();
 		frame.setVisible(true);
-		
+
 		// Below: Close the application when X is hit in the top right corner.
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	}
@@ -61,6 +65,7 @@ public class UserInterface implements ActionListener
 
 		JPanel buttonPanel = new JPanel(new GridLayout(6, 4));
 
+		// The specific buttons.
 		addButton(buttonPanel, "C");
 		addButton(buttonPanel, "(");
 		addButton(buttonPanel, ")");
@@ -157,17 +162,14 @@ public class UserInterface implements ActionListener
 		else if(command.equals("^"))
 			calc.caret();
 		else if(command.equals("Del Last Char"))
-			
+
 			// the below if statement does not allow a user to delete last character
 			// when the answer is displayed on the screen.
 			if (calc.getHasEqualsBeenPressed() == false)
 			{
 				calc.delLastChar();
 			}
-			else
-			{
-				// do nothing
-			}
+
 		redisplay();
 	}
 

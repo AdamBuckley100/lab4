@@ -6,6 +6,9 @@ import java.util.*;
  * This class is the behind the scenes of how the calculator actually does
  * what the userInterface class specifies.
  * 
+ * Module: Data Structures
+ * References: Moodle Data Structures notes.
+ * 
  * @author Adam Buckley
  * @Date - Start Date: 09/02/2016
  * @Date - End Date: 25/02/2016
@@ -15,11 +18,14 @@ public class CalcEngine
 	// declare a variable of type char named operator.
 	char operator;
 
+	// display Value is what is displayed in the calculator screen.
 	String displayValue = "";
+	
 	// the default status of a boolean is false.
 	boolean hasEqualsBeenPressed = false;
 
-	// A hashmap mapping the priority of the operators (PEMDAS).
+	// A hashmap mapping the operators to their priority values. (PEMDAS).
+	// A method below fills it.
 	static HashMap<String,Integer> priority = setPriorityOfOperands();
 
 	/**
@@ -38,11 +44,11 @@ public class CalcEngine
 	public String convertingInfixToPostfix()
 	{
 		String result = "";
-		
+
 		// st is a variable of type MyStack which is initialized with a stack (array stack) size of 100:
 		// 100 spaces are in my stack on initialization.
 		MyStack st = new MyStack(100);
-		
+
 		// scan the infix from left to right
 		for(int i = 0; i < displayValue.length() ; i++)
 		{
@@ -51,8 +57,11 @@ public class CalcEngine
 
 			if (Character.isDigit(c) || c == '.')
 			{
+				
+				// just add it to the result.
 				result += c;
 
+				// if we're on the last value in the infix expression
 				if (i != displayValue.length() - 1)
 				{
 					char d = displayValue.charAt(i+1);
@@ -69,6 +78,7 @@ public class CalcEngine
 			}
 			else
 			{
+				// if stack is empty..
 				if (st.isEmpty())
 				{
 					String o = String.valueOf(c);
@@ -93,15 +103,18 @@ public class CalcEngine
 						System.out.println("*" + peekWithShow(st).getClass().getName() + "*");
 					}
 					while (!peekWithShow(st).equals("("));
-					// The line above: IT'S VERY IMPORTANT THAT WITH STRING COMPARING YPU USE THE .equals and
-					// NEVER USE != or == etc.! STRING COMPARE USES .EQUALS ONLY!!!!
-
+					// Line above: It's  important that with the string comparing that 
+					// the .equals is used and != or == etc. is not used.
+	
 					// now discard the ) on the stack:
 					popWithShow(st);
 				}
 				else
 				{
-					while (!st.isEmpty() && comparePriorityOfOperands(peekWithShow(st),String.valueOf(c)))
+					// while stack is not empty and whats on top of the stack does have higher priority than
+					// the operator being checked right now then simply pop the stack and placed that poped
+					// operator onto the result.
+					while (!st.isEmpty() && comparePriorityOfOperators(peekWithShow(st),String.valueOf(c)))
 					{
 						String popedChar = popWithShow(st);
 						result += popedChar;
@@ -124,16 +137,19 @@ public class CalcEngine
 	}
 
 	/**
-	 *
+	 * This method does the evaluating of the post fix expression that was derived via
+	 * the convertingInfixToPostfix method (directly above).
+	 * This method basically does the sum and places the answer (which is in String form)
+	 * in the displayValue global variable.
 	 */
 	public void evaluatingAPostfixExpression()
 	{
 		String thePostfixExpression = convertingInfixToPostfix();
-		
+
 		// st is a variable of type MyStack which is initialized with a stack (array stack) size of 100:
 		// 100 spaces are in my stack on initialization.
 		MyStack st = new MyStack(100);
-		
+
 		// Below line: An array of Strings is populated with the sum in post fix expression mode
 		// but with each single character of the String having it's own spot in the array.
 		// a space is used a delimiter.
@@ -144,7 +160,7 @@ public class CalcEngine
 		{
 			// charAt(0) works because there is only one character per array location.
 			char ch = arrayOfStrings[p].charAt(0);
-			
+
 			// If the arrayofString's location single single is a digit
 			if (Character.isDigit(ch))
 			{ 
@@ -183,7 +199,7 @@ public class CalcEngine
 			}
 		}
 		String finalResultInString = popWithShow(st);
-		
+
 		// To avoid answers like 38.0 on the calc output I put the following line to chop ".0" off the end
 		// It is there because I'm working with a double.
 		if (finalResultInString.endsWith(".0"))
@@ -194,13 +210,12 @@ public class CalcEngine
 	}
 
 	/**
-	 * 
-	 * @param theString
+	 * @param theString - two different Sting variables.
 	 * @param String - two different String variables.
 	 * @return boolean - return true if the first string has a higher priority 
 	 * than the second String.
 	 */
-	public boolean comparePriorityOfOperands(String theString, String c)
+	public boolean comparePriorityOfOperators(String theString, String c)
 	{
 		if (priority.get(theString) >= priority.get(c))
 		{
@@ -269,11 +284,17 @@ public class CalcEngine
 		displayValue += "-";
 	}
 
+	/**
+	 * The 'multiply' button was pressed.
+	 */
 	public void multiply()
 	{
 		displayValue += "×";
 	}
 
+	/**
+	 * The 'dot' button was pressed.
+	 */
 	public void dotPressed()
 	{
 		displayValue += ".";
@@ -320,7 +341,7 @@ public class CalcEngine
 	public void clear()
 	{
 		setHasEqualsBeenPressed(false);
-		
+
 		// simply resets the displayValue String to an empty string so user can start
 		// all over inputting a completely new sum.
 		displayValue = "";
