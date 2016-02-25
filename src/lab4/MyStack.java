@@ -3,7 +3,7 @@ package lab4;
 import java.util.Arrays;
 
 /** 
- * @author  Adam Buckley (20062910)
+ * @author g Adam Buckley (20062910)
  * @version 1.0
  * @Date - Start Date: 09/02/2016
  * @Date - End Date: 16/02/2016
