@@ -10,7 +10,7 @@ import javax.swing.border.*;
  * done here. This class is responsible just for putting up the display on 
  * screen and the buttons etc. It then refers to the "CalcEngine" to do all the real work.
  * 
- * Module: Data Structures
+ * Module: Data Structures.
  * References: Moodle Data Structures notes.
  * 
  * @author Adam Buckley

@@ -6,7 +6,7 @@ import java.util.*;
  * This class is the behind the scenes of how the calculator actually does
  * what the userInterface class specifies.
  * 
- * Module: Data Structures
+ * Module: Data Structures.
  * References: Moodle Data Structures notes.
  * 
  * @author Adam Buckley

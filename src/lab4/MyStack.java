@@ -6,7 +6,7 @@ import java.util.Arrays;
  * This class is my array stack replacing the java API stack implementation.
  * This stack is implemented using an array instead of using the stack class as implemented in the java API.
  * 
- *  * Module: Data Structures
+ * Module: Data Structures.
  * References: Moodle Data Structures notes & youtube video "stacks & queues".
  * 
  * @author Adam Buckley (20062910)
